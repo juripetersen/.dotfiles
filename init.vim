@@ -24,7 +24,6 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " Languages
 Plug 'rust-lang/rust.vim'
-Plug 'simrat39/rust-tools.nvim'
 Plug 'phpactor/phpactor'
 
 call plug#end()
@@ -40,5 +39,6 @@ vnoremap K :m '<-2<CR>gv=gv
 augroup vvjpet 
     autocmd!
     autocmd BufWritePre *\(.blade.php\)\@<! :lua vim.lsp.buf.formatting() 
+    autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END

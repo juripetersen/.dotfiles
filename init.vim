@@ -36,9 +36,9 @@ let mapleader = " "
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-augroup vvjpet 
+augroup vvjpet
     autocmd!
-    autocmd BufWritePre *\(.blade.php\)\@<! :lua vim.lsp.buf.formatting() 
+    autocmd BufWritePre *\(.blade.php\)\@<! :lua vim.lsp.buf.formatting()
     autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END

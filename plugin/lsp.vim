@@ -5,6 +5,7 @@ lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
   local lspkind = require("lspkind")
+  local lspconfig = require'lspconfig'
 
   cmp.setup({
     formatting = {
@@ -77,13 +78,31 @@ lua <<EOF
     })
   })
 
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-EOF
 
-lua require'lspconfig'.intelephense.setup{}
-lua require'lspconfig'.rust_analyzer.setup{}
-lua require'lspconfig'.eslint.setup{}
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+        },
+        completion = {
+	      postfix = {
+	        enable = false,
+ 	      },
+        },
+      },
+    },
+    capabilities = capabilities,
+  }
+
+  lspconfig.intelephense.setup{}
+  lspconfig.eslint.setup{}
+EOF
 
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vd :lua vim.diagnostic.open_float()<CR>

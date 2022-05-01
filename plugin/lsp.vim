@@ -105,7 +105,9 @@ lua <<EOF
 EOF
 
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>gD :lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>vd :lua vim.diagnostic.open_float()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>fmt :lua vim.lsp.buf.formatting()<CR>
 nnoremap <C-h> :lua vim.lsp.buf.signature_help()<CR>
 nnoremap K :lua vim.lsp.buf.hover()<CR>

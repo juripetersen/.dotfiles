@@ -22,13 +22,15 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
+"GUI
+ Plug 'itchyny/lightline.vim'
+ Plug 'itchyny/vim-gitbranch'
+
 " Languages
 Plug 'rust-lang/rust.vim'
 Plug 'phpactor/phpactor'
 
 call plug#end()
-
-colorscheme github_light_default
 
 let mapleader = " "
 

@@ -14,7 +14,7 @@ set incsearch
 set signcolumn=yes
 set showcmd " Show (partial) command in status line.
 set mouse=a " Enable mouse usage (all modes) in terminals
-set colorcolumn=100
+set colorcolumn=80
 set cursorline
 
 " No arrow keys --- force yourself to use the home row

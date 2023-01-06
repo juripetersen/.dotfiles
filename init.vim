@@ -1,15 +1,33 @@
-call plug#begin()
-" Themes
+call plug#begin() " Themes Plug 'projekt0n/github-nvim-theme'
+Plug 'morhetz/gruvbox'
 Plug 'projekt0n/github-nvim-theme'
 
 "Code completion
-Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'glepnir/lspsaga.nvim'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
+Plug 'ianks/vim-tsx'
+Plug 'leafgarland/typescript-vim'
+
+" LSP Support
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
+" Autocompletion
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+
+"  Snippets
+Plug 'L3MON4D3/LuaSnip'
+" Snippet collection (Optional)
+Plug 'rafamadriz/friendly-snippets'
+
+Plug 'VonHeikemen/lsp-zero.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -25,6 +43,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 "GUI
  Plug 'itchyny/lightline.vim'
  Plug 'itchyny/vim-gitbranch'
+ Plug 'RRethy/nvim-base16'
 
 " Languages
 Plug 'rust-lang/rust.vim'
@@ -37,10 +56,11 @@ let mapleader = " "
 " vim specific remaps
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+vnoremap <C-y> "*y<Esc>
 
 augroup vvjpet
     autocmd!
-    autocmd BufWritePre *\(.blade.php\)\@<! :lua vim.lsp.buf.formatting()
+    " autocmd BufWritePre *\(.blade.php\)\@<! :lua vim.lsp.buf.formatting()
     autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END

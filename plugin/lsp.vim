@@ -125,6 +125,9 @@ lua <<EOF
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+  },
 }
 
 local lsp = require("lsp-zero")

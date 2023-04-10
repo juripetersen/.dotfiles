@@ -26,7 +26,8 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'L3MON4D3/LuaSnip'
 " Snippet collection (Optional)
 Plug 'rafamadriz/friendly-snippets'
-
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip'
 Plug 'VonHeikemen/lsp-zero.nvim'
 
 " Neovim Tree shitter
@@ -43,11 +44,13 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 "GUI
  Plug 'itchyny/lightline.vim'
  Plug 'itchyny/vim-gitbranch'
+ Plug 'andymass/vim-matchup'
  Plug 'RRethy/nvim-base16'
 
 " Languages
 Plug 'rust-lang/rust.vim'
 Plug 'phpactor/phpactor'
+Plug 'whonore/Coqtail'
 
 call plug#end()
 

@@ -51,6 +51,11 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'phpactor/phpactor'
 Plug 'whonore/Coqtail'
+Plug 'cespare/vim-toml', {'branch': 'main'}
+Plug 'stephpy/vim-yaml'
+Plug 'rhysd/vim-clang-format'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 

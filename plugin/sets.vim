@@ -34,6 +34,10 @@ set synmaxcol=500
 set laststatus=2
 set relativenumber " Relative line numbers
 set number " Also show current absolute line
+
+hi LineNr guibg=none guifg=#ffffff
+hi SignColumn guibg=none guifg=#ffffff
+
 set diffopt+=iwhite " No whitespace in vimdiff
 " Make diffing better: https://vimways.org/2018/the-power-of-diff/
 set diffopt+=algorithm:patience
@@ -65,6 +69,10 @@ set mouse=a " Enable mouse usage (all modes) in terminals
 set colorcolumn=80
 set cursorline
 
+" Sane splits
+set splitright
+set splitbelow
+
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
 set formatoptions+=r " continue comments when pressing ENTER in I mode
@@ -78,6 +86,15 @@ set ignorecase
 set smartcase
 set gdefault
 
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
+
+" Decent wildmenu
+set wildmenu
+set wildmode=list:longest
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -86,6 +103,11 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 ino <C-C> <Esc>
+
+" Very magic by default
+nnoremap ? ?\v
+nnoremap / /\v
+cnoremap %s/ %sm/
 
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
@@ -97,6 +119,9 @@ autocmd InsertLeave * set cul
 
 " Open new file adjacent to current file
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
 
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
@@ -112,3 +137,28 @@ au Filetype rust set colorcolumn=100
 set completeopt=menuone,noinsert,noselect
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
+
+" =============================================================================
+" # Autocommands
+" =============================================================================
+
+" Prevent accidental writes to buffers that shouldn't be edited
+autocmd BufRead *.orig set readonly
+autocmd BufRead *.pacnew set readonly
+
+" Leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
+
+" Jump to last edit position on opening file
+if has("autocmd")
+  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Help filetype detection
+autocmd BufRead *.plot set filetype=gnuplot
+autocmd BufRead *.md set filetype=markdown
+autocmd BufRead *.lds set filetype=ld
+autocmd BufRead *.tex set filetype=tex
+autocmd BufRead *.trm set filetype=c
+autocmd BufRead *.xlsx.axlsx set filetype=ruby

@@ -50,6 +50,18 @@ if executable('rg')
 	set grepformat=%f:%l:%c:%m
 endif
 
+lua <<EOF
+	function ColorMyPencils(color)
+		color = color or "base16-gruvbox-dark-hard"
+		vim.cmd.colorscheme(color)
+
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	end
+
+	ColorMyPencils()
+EOF
+
 function! Toggle_background()
     if g:colors_name == "base16-gruvbox-dark-hard"
         exec 'colorscheme github_light_default'

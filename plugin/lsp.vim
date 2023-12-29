@@ -103,6 +103,7 @@ lua <<EOF
   lspconfig.intelephense.setup{}
   lspconfig.eslint.setup{}
   lspconfig.pylsp.setup{}
+  lspconfig.jdtls.setup{ cmd = { 'jdtls' } }
 
   require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
@@ -139,6 +140,7 @@ lsp.ensure_installed({
   'eslint',
   'sumneko_lua',
   'rust_analyzer',
+  'jdtls',
 })
 
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

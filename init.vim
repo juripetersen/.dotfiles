@@ -8,6 +8,7 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
+Plug 'mfussenegger/nvim-jdtls'
 
 " LSP Support
 Plug 'neovim/nvim-lspconfig'

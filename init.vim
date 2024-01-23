@@ -6,6 +6,7 @@ endif
 
 call plug#begin() " Themes Plug 'projekt0n/github-nvim-theme'
 Plug 'morhetz/gruvbox'
+Plug 'ellisonleao/gruvbox'
 Plug 'projekt0n/github-nvim-theme'
 
 "Code completion

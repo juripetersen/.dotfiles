@@ -7,6 +7,10 @@ lua <<EOF
   local lspkind = require("lspkind")
   local lspconfig = require'lspconfig'
 
+  local lsp = require("lsp-zero")
+
+  lsp.extend_lspconfig()
+
   cmp.setup({
     formatting = {
         format = lspkind.cmp_format({
@@ -107,7 +111,7 @@ lua <<EOF
 
   require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "help", "javascript", "typescript", "php", "scala", "c", "lua", "rust" },
+  ensure_installed = { "javascript", "typescript", "php", "scala", "c", "lua", "rust" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -131,16 +135,17 @@ lua <<EOF
   },
 }
 
-local lsp = require("lsp-zero")
-
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'sumneko_lua',
-  'rust_analyzer',
-  'jdtls',
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    ensure_installed = {
+      'tsserver',
+      'eslint',
+      'rust_analyzer',
+      'jdtls',
+    },
+    handlers = {
+      lsp.default_setup,
+    },
 })
 
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

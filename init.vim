@@ -17,6 +17,9 @@ Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'mfussenegger/nvim-jdtls'
 
+" LLM
+Plug 'coder/claudecode.nvim'
+
 " LSP Support
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'

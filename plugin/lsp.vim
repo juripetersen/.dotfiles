@@ -7,6 +7,8 @@ lua <<EOF
   local lspkind = require("lspkind")
   local lspconfig = require'lspconfig'
 
+  require('claudecode').setup({})
+
   local lsp = require("lsp-zero")
 
   lsp.extend_lspconfig()
@@ -150,9 +152,6 @@ require('mason-lspconfig').setup({
 
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
-lsp.set_preferences({
-  sign_icons = { }
-})
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}

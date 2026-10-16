@@ -5,8 +5,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin() " Themes Plug 'projekt0n/github-nvim-theme'
-Plug 'morhetz/gruvbox'
-Plug 'ellisonleao/gruvbox'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'projekt0n/github-nvim-theme'
 
 "Code completion
@@ -21,7 +20,6 @@ Plug 'mfussenegger/nvim-jdtls'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-
 " Autocompletion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -41,7 +39,7 @@ Plug 'VonHeikemen/lsp-zero.nvim'
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-Plug 'romgrk/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -64,6 +62,11 @@ Plug 'stephpy/vim-yaml'
 Plug 'rhysd/vim-clang-format'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'latex-lsp/texlab'
+
+" Claude Code
+Plug 'nvim-lua/plenary.nvim'
+Plug 'greggh/claude-code.nvim'
 
 call plug#end()
 

@@ -5,7 +5,6 @@ lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
   local lspkind = require("lspkind")
-  local lspconfig = require'lspconfig'
 
   local lsp = require("lsp-zero")
 
@@ -84,30 +83,70 @@ lua <<EOF
 
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = {
-          allFeatures = true,
-        },
-        completion = {
-	      postfix = {
-	        enable = false,
- 	      },
-        },
-      },
-    },
-    capabilities = capabilities,
-  }
+  -- Rust
+  vim.lsp.config('rust_analyzer', {
+      -- Server-specific settings. See `:help lspconfig-setup`
+      settings = {
+          ["rust-analyzer"] = {
+              cargo = {
+                  features = "all",
+              },
+              checkOnSave = {
+                  enable = true,
+              },
+              check = {
+                  command = "clippy",
+              },
+              imports = {
+                  group = {
+                      enable = false,
+                  },
+              },
+              completion = {
+                  postfix = {
+                      enable = false,
+                  },
+              },
+          },
+       },
+  })
+  vim.lsp.enable('rust_analyzer')
 
-  lspconfig.intelephense.setup{}
-  lspconfig.eslint.setup{}
-  lspconfig.pylsp.setup{}
-  lspconfig.jdtls.setup{ cmd = { 'jdtls' } }
+  vim.lsp.enable('intelephense')
+  vim.lsp.enable('eslint')
+  vim.lsp.enable('pylsp')
+  vim.lsp.enable('jdtls')
+
+  vim.lsp.config('texlab', {
+    cmd = { "texlab" },
+    filetypes = { "tex", "bib" },
+    settings = {
+      texlab = {
+        auxDirectory = ".",
+        bibtexFormatter = "texlab",
+        build = {
+          args = { "-w /workdir", "latex-docker-texlive", "pdflatex", "main.tex" },
+          executable = "docker compose exec",
+          forwardSearchAfter = false,
+          onSave = true
+        },
+        chktex = {
+          onEdit = false,
+          onOpenAndSave = false
+        },
+        diagnosticsDelay = 300,
+        formatterLineLength = 80,
+        forwardSearch = {
+          args = {}
+        },
+        latexFormatter = "latexindent",
+        latexindent = {
+          modifyLineBreaks = false
+        }
+      }
+    }
+  })
+  vim.lsp.enable('texlab')
 
   require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
@@ -118,7 +157,7 @@ lua <<EOF
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+  auto_install = false,
 
   highlight = {
     -- `false` will disable the whole extension
@@ -129,6 +168,7 @@ lua <<EOF
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+    disable = { "properties", "dockerfile" },
   },
   matchup = {
     enable = true,              -- mandatory, false will disable the whole extension
@@ -138,7 +178,6 @@ lua <<EOF
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
-      'tsserver',
       'eslint',
       'rust_analyzer',
       'jdtls',
